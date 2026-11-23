@@ -1,0 +1,302 @@
+/* =========================================================
+   にほん ちず — estilos
+   ========================================================= */
+
+:root {
+  --indigo: #1d3557;
+  --bermellon: #d62839;
+  --crema: #fbf6ea;
+  --papel: #fffdf7;
+  --gris: #6b7a8c;
+}
+
+body {
+  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  background: var(--crema);
+  color: var(--indigo);
+}
+
+.titulo {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--indigo);
+}
+
+.subtitulo {
+  color: var(--gris);
+}
+
+/* ---------- Mapa ---------- */
+
+.mapa-contenedor {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border: 6px solid var(--papel);
+  border-radius: 18px;
+  background: #9fdcf5;
+  box-shadow: 0 10px 30px rgba(29, 53, 87, 0.18);
+}
+
+.mapa-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  user-select: none;
+}
+
+/* Bandera en la esquina superior izquierda */
+.bandera {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  width: 64px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.bandera::before {
+  content: '';
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: var(--bermellon);
+}
+
+/* ---------- Pines ---------- */
+
+.pines {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.pin {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: var(--bermellon);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 26px;
+  text-align: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
+  transform: translate(-50%, -100%);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+/* Punta del pin */
+.pin::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  margin-top: -4px;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--bermellon);
+  border-bottom: 0;
+}
+
+.pin:hover,
+.pin:focus-visible {
+  transform: translate(-50%, -100%) scale(1.12);
+  outline: none;
+}
+
+.pin.activo {
+  background: var(--indigo);
+}
+
+.pin.activo::after {
+  border-top-color: var(--indigo);
+}
+
+/* ---------- Pop-up ---------- */
+
+.popup {
+  position: absolute;
+  z-index: 5;
+  width: min(300px, 80%);
+  background: var(--papel);
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  transform: translate(-50%, -100%);
+  animation: aparecer 0.2s ease-out;
+}
+
+.popup[hidden] {
+  display: none !important;
+}
+
+/* Abajo del pin, cuando no hay espacio arriba */
+.popup.abajo {
+  transform: translate(-50%, 0);
+}
+
+/* Cola que apunta al pin */
+.popup::after {
+  content: '';
+  position: absolute;
+  left: var(--cola, 50%);
+  bottom: -10px;
+  transform: translateX(-50%);
+  border: 10px solid transparent;
+  border-top-color: var(--papel);
+  border-bottom: 0;
+}
+
+.popup.abajo::after {
+  bottom: auto;
+  top: -10px;
+  border-top-color: transparent;
+  border-bottom-color: var(--papel);
+}
+
+@keyframes aparecer {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.btn-cerrar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--indigo);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.btn-cerrar:hover {
+  background: #ffffff;
+  color: var(--bermellon);
+}
+
+.popup-img {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 14px 14px 0 0;
+  background: #e9eef3;
+}
+
+.popup-cuerpo {
+  padding: 14px 16px 16px;
+}
+
+.region-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--bermellon);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.region-es {
+  display: block;
+  margin-top: 4px;
+  color: var(--gris);
+}
+
+.popup-ciudad {
+  margin: 8px 0 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.romaji {
+  margin: 0;
+  font-style: italic;
+  color: var(--gris);
+}
+
+.tipo {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--gris);
+}
+
+.popup hr {
+  margin: 10px 0;
+}
+
+.etiqueta {
+  margin: 0 0 2px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--bermellon);
+}
+
+.popup-sitio {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.sitio-es {
+  margin: 6px 0 0;
+  font-size: 0.95rem;
+}
+
+/* ---------- Lista de regiones ---------- */
+
+.leyenda {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.region {
+  margin-bottom: 12px;
+  padding: 14px 16px;
+  background: var(--papel);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.region-titulo {
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.region-titulo small {
+  margin-left: 0.5rem;
+  font-weight: 400;
+  color: var(--gris);
+}
+
+@media (max-width: 480px) {
+  .popup-img {
+    height: 130px;
+  }
+  .popup-ciudad {
+    font-size: 1.3rem;
+  }
+}
