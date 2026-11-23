@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>にほん ちず</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container py-4">
+
+  <header class="text-center mb-4">
+    <h1 class="titulo">にほん ちず</h1>
+    <p class="subtitulo">ちほうを えらんで、「？」を おして ください。</p>
+  </header>
+
+  <!-- Mapa interactivo -->
+  <div class="mapa-contenedor" id="mapa">
+
+    <!-- Bandera (esquina superior izquierda) -->
+    <div class="bandera" aria-hidden="true"></div>
+
+    <!-- Imagen del mapa: img/mapa.png -->
+    <img src="img/mapa.png" alt="にほん ちず" class="mapa-img" draggable="false">
+
+    <!-- Pines: se generan desde js/script.js -->
+    <div class="pines" id="pines"></div>
+
+    <!-- Pop-up único: se reutiliza para cada lugar -->
+    <div class="popup" id="popup" role="dialog" aria-live="polite" hidden>
+      <button class="btn-cerrar" id="btn-cerrar" type="button" aria-label="とじる">×</button>
+      <img id="popup-img" class="popup-img" alt="">
+      <div class="popup-cuerpo">
+        <span class="region-badge" id="popup-region"></span>
+        <small class="region-es" id="popup-region-es"></small>
+
+        <h2 class="popup-ciudad" id="popup-ciudad"></h2>
+        <p class="romaji" id="popup-ciudad-romaji"></p>
+        <p class="tipo" id="popup-tipo"></p>
+
+        <hr>
+
+        <p class="etiqueta">かんこうち</p>
+        <h3 class="popup-sitio" id="popup-sitio"></h3>
+        <p class="romaji" id="popup-sitio-romaji"></p>
+        <p class="sitio-es" id="popup-sitio-es"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lista de regiones -->
+  <section class="leyenda-wrap mt-5">
+    <h2 class="h5 mb-3 text-center">ちほう</h2>
+    <div class="leyenda" id="leyenda"></div>
+  </section>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
